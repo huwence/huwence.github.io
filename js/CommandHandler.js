@@ -102,16 +102,15 @@ class CommandHandler {
         
         let url = './articles/' + fileNode.id + '.md'
         let doneFetch = function () {
-          self.viewCtrl.data.splice(self.viewCtrl.data.length - 2, 1);
           self.done()
           self.viewCtrl.pending = false
         }
 
         helpers.asyncGet(url).then((content) => {
-          self.output(1, '', marked(content))
+          self.viewCtrl.data.splice(self.viewCtrl.data.length - 1, 1, marked(content))
           doneFetch()
         }, (status) => {
-          self.output(1, '', lang['CatFailed'])
+          self.viewCtrl.data.splice(self.viewCtrl.data.length - 1, 1, lang['CatFailed'])
           doneFetch()
         })
       } else {

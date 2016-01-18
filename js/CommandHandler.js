@@ -98,6 +98,8 @@ class CommandHandler {
       if (fileNode.isFile()) {
         self.viewCtrl.pending = true
         self.output(1, '', 'loading...')
+        self.done()
+        
         let url = './articles/' + fileNode.id + '.md'
         let doneFetch = function () {
           self.viewCtrl.data.splice(self.viewCtrl.data.length - 2, 1);

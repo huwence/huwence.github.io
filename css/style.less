@@ -1,0 +1,107 @@
+@themeColor: #2fed2f;
+
+* {box-sizing:border-box;}
+html, body {
+  margin:0;
+  padding:0 3px;
+j width:100%;
+  height:100%;
+  background:#000;
+  color: @themeColor;
+}
+
+.terminal-container{
+  padding: 0 5px;
+}
+
+.line {
+  font-size: 14px;
+  font-family: Monaco, Menlo, Consolas, "Courier New", monospace;
+  overflow-wrap: break-word;
+  clear: both;
+  line-height: 28px;
+  .head {
+    float: left;
+    padding-right: 5px;
+  }
+  .content {
+    position: relative;
+    white-space: pre;
+  }
+  .result {
+    width: 100%;
+    overflow-wrap: break-word;
+    color: #fff;
+    b {
+      padding-right: 10px;
+    }
+    .file {
+      color: #fff;
+    }
+    .dir {
+      color: #39beff;
+    }
+  }
+  .cursor {
+    position: absolute;
+    width: 6px;
+    top: 5px;
+    height: 18px;
+    background: @themeColor;
+    z-index: 1;
+    opacity: 1;
+  }
+  .blur {
+    background: transparent;
+    border: 1px solid @themeColor;
+  }
+  .input {
+    position: absolute;
+    width: 0;
+    height: 20px;
+    background: transparent;
+    opacity: 0;
+    border: none;
+    resize: none;
+  }
+  .result {
+    h1, h2, h3, h4, h5, h6, h7, h8 {
+      margin: 25px 0;
+    }
+    p {
+      margin: 0;
+    }
+    p code {
+      background: #fff;
+      color: #000;
+      padding: 3px;
+      border-radius: 4px;
+    }
+    pre {
+      white-space: pre;
+      display: inline-block;
+      border: 1px solid #ddd;
+      border-radius: 3px;
+      padding: 5px 10px;
+    }
+    blockquote {
+      padding: 0 10px;
+      border-left: 5px solid #ccc;
+      margin: 10px 0;
+    }
+    table {
+      width: 100%;
+      overflow: auto;
+      display: block;
+      border-spacing: 0;
+      border-collapse: collapse
+    }
+    table tr {
+      border-top: 1px solid #ccc;
+    }
+    table th, table td {
+      border: 1px solid #ddd;
+      padding: 2px 12px;
+    }
+  }
+}

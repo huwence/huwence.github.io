@@ -6,12 +6,15 @@ import FileNode from './FileNode.js'
 export default {
   separator: '/',
   realpath(path, currentDir) {
-    if (path.endsWith(this.separator)) {
-      path = path.substr(0, path.length - 1)
-    }
+    if (path === this.separator) return path
+
     if (!path.startsWith(this.separator)) {
       path = currentDir + this.separator + path
     }
+    if (path.endsWith(this.separator)) {
+      path = path.substr(0, path.length - 1)
+    }
+
     path = path.replace(/\\/g, this.separator)
     let parts = path.split(this.separator)
     let res = []
@@ -87,9 +90,14 @@ export default {
       path = path.replace(/~/g, '/home/huwence')
       realpath = this.realpath(path, currentDir)
     }
-    let parts = realpath.split('/')
-    if (parts[0] === '') {
-      parts[0] = '/'
+    let parts;
+    if (realpath === this.separator) {
+      parts = [this.separator]
+    } else {
+      parts = realpath.split(this.separator)
+      if (parts[0] === '') {
+        parts[0] = this.separator
+      }
     }
     let filename = parts[parts.length - 1]
     let fileNodes = this.getFileByName(root, filename)

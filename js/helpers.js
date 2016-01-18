@@ -1,7 +1,5 @@
 "use strict"
 
-var audios = {}
-
 // helpers
 export default {
   measureSize($host, str) {
@@ -35,12 +33,22 @@ export default {
     }
     return pos
   },
-  syncGet(url) {
-    var xmlhttp = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveObject('Microsoft.XMLHTTP')
-    xmlhttp.open("GET", url, false)
-    xmlhttp.send()
+  asyncGet(url) {
+    var promise = new Promise(function (resolve, reject) {
+      var xmlhttp = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveObject('Microsoft.XMLHTTP')
+      xmlhttp.open("GET", url)
+      xmlhttp.send()
+      xmlhttp.onreadystatechange = function () {
+        if (xmlhttp.readyState !== 4) return
+        if (xmlhttp.status === 200) {
+          resolve(xmlhttp.responseText)
+        } else {
+          reject(xmlhttp.status)
+        }
+      }
+    })
 
-    return xmlhttp.responseText
+    return promise
   },
   fileTag(content, type) {
     return `<b class=${type}>${content}</b>`

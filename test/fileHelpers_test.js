@@ -35,6 +35,10 @@ describe('fileHelpers', () => {
         path = '/a/b/./d/../e/f'
         expect(fileHelpers.realpath(path, currentDir))
             .to.equal('/a/b/e/f')
+
+        path = '/'
+        expect(fileHelpers.realpath(path, currentDir))
+            .to.equal('/')
     })
 
     it('parseFileData', () => {
@@ -91,6 +95,9 @@ describe('fileHelpers', () => {
 
         fileNode = fileHelpers.parsePath(root, '/home/huwence/article', '/home')
         expect(fileNode.name).to.equal('home')
+
+        fileNode = fileHelpers.parsePath(root, '/home/huwence/article', '/')
+        expect(fileNode.name).to.equal('/')
     })
 
     it('getAbsolutePath', () => {

@@ -97,11 +97,21 @@ class CommandHandler {
     if (fileNode !== null) {
       if (fileNode.isFile()) {
         self.viewCtrl.pending = true
+        self.output(1, '', 'loading...')
         let url = './articles/' + fileNode.id + '.md'
-        let content = helpers.syncGet(url)
-        self.output(1, '', marked(content))
-        self.done()
-        self.viewCtrl.pending = false
+        let doneFetch = function () {
+          self.viewCtrl.data.splice(self.viewCtrl.data.length - 2, 1);
+          self.done()
+          self.viewCtrl.pending = false
+        }
+
+        helpers.asyncGet(url).then((content) => {
+          self.output(1, '', marked(content))
+          doneFetch()
+        }, (status) => {
+          self.output(1, '', lang['CatFailed'])
+          doneFetch()
+        })
       } else {
         self.output(1, '', this.error('cat', path, lang['NotSupport']))
         self.done()

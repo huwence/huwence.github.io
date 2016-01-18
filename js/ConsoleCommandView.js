@@ -61,8 +61,9 @@ class ConsoleCommandView {
   
     if (offsetX > this.lineWidth) {
       let row = parseInt(offsetX / this.lineWidth, 10)
-      offsetX = offsetX % this.lineWidth
-      offsetY = row * this.lineHeight
+      // 5px is padding-right of line content
+      offsetX = offsetX % this.lineWidth + row * 5
+      offsetY = row * this.lineHeight + 5
     } else {
       offsetX = this.headWidth + size.width
     }

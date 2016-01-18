@@ -75,7 +75,7 @@ class ConsoleViewCtrl {
   }
   autoplay() {
     let player = new Player()
-    let cmds = 'pwd|ls|cd article|ls|cat README|cd ~/|'.split('')
+    let cmds = 'clear|pwd|ls|cd article|ls|cat README|cd ~/|'.split('')
     player.start(this, cmds)
   }
 }

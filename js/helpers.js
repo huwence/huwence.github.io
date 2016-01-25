@@ -53,6 +53,16 @@ export default {
   fileTag(content, type) {
     return `<b class=${type}>${content}</b>`
   },
+  getQuery(param) {
+    var reg = new RegExp('(?:\\?|&)' + param + '=([^?&]*)', 'i'),
+        result = reg.exec(location.search)
+
+    if (result && result[1]) {
+        return result[1]
+    } else {
+        return null
+    }
+  },
   playAudio(url) {
     if (!this.audios) {
       this.audios = {}

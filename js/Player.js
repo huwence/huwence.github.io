@@ -6,7 +6,7 @@ class Player {
         this.enterEvent = new CustomEvent('keydown', {detail: 13})
         this.timer = null
     }
-    start(viewCtrl, cmds) {
+    start(viewCtrl, cmds, interval=230) {
         var self = this
         if (cmds.length === 0) {
           return
@@ -24,7 +24,7 @@ class Player {
               }
             }
             self.start(viewCtrl, cmds)
-        }, 230)
+        }, interval)
     }
     stop() {
         clearTimeout(this.timer)

@@ -12,6 +12,7 @@ function main() {
         var root = fileHelpers.parseFileData(files)
         var view = new ConsoleViewCtrl(container, initdata, root, '/home/huwence')
         view.update()
+        view.handleQuery()
     } else {
         console.log('System Initialize failed')
     }

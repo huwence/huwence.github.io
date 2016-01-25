@@ -1,6 +1,7 @@
 "use strict"
 
 import utils from './utils.js'
+import helpers from './helpers.js'
 import ConsoleCommandView from './ConsoleCommandView.js'
 import ConsoleResultView from './ConsoleResultView.js'
 import CommandHandler from './CommandHandler.js'
@@ -59,6 +60,14 @@ class ConsoleViewCtrl {
       self.commandView.input.focus()
     }
   }
+  handleQuery() {
+    let name = helpers.getQuery('name')
+
+    if (name) {
+      name = decodeURIComponent(name)
+      this.gotoArticle(name)
+    }
+  }
   gc() {
     if (this.commandView) delete this.commandView
     if (this.resultView) delete this.deleteView
@@ -77,6 +86,11 @@ class ConsoleViewCtrl {
     let player = new Player()
     let cmds = 'clear|pwd|ls|cd article|ls|cat README|cd ~/|'.split('')
     player.start(this, cmds)
+  }
+  gotoArticle(name) {
+    let player = new Player()
+    let cmds = ('cd ~/article|cat ' + name + '|').split('')
+    player.start(this, cmds, 100)
   }
 }
 
